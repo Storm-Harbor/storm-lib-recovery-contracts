@@ -1,0 +1,8 @@
+{
+  "contracts.INVALID_DOCUMENT": "Недопустимый документ в {field}.",
+  "contracts.INVALID_CONFIGURATION": "Недопустимая конфигурация в {field}.",
+  "contracts.INVALID_SCOPE": "Недопустимая область доступа в {field}.",
+  "contracts.SCOPE_MISMATCH": "Область доступа не совпадает в {field}.",
+  "contracts.SOURCE_TARGET_CONFLICT": "Конфликт источника и назначения в {field}.",
+  "contracts.DUPLICATE_SECRET_REFERENCE": "Повторная ссылка на секрет в {field}."
+}

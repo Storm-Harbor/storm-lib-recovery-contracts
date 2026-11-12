@@ -1,0 +1,21 @@
+apiVersion: recovery.stormharbor.io/v1alpha1
+kind: RecoveryConfiguration
+metadata:
+  name: service-restore
+  scope:
+    organizationId: org-example
+    projectId: project-example
+spec:
+  purpose: restore
+  source:
+    name: primary-environment
+    scope:
+      organizationId: org-example
+      projectId: project-example
+  target:
+    name: recovery-environment
+    providerRef: aws-recovery
+    provisioning: existing
+    placementRef: recovery-region
+    lifecycle: retained
+    cleanup: retain

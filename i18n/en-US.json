@@ -1,0 +1,8 @@
+{
+  "contracts.INVALID_DOCUMENT": "Invalid document at {field}.",
+  "contracts.INVALID_CONFIGURATION": "Invalid configuration at {field}.",
+  "contracts.INVALID_SCOPE": "Invalid scope at {field}.",
+  "contracts.SCOPE_MISMATCH": "Scope does not match at {field}.",
+  "contracts.SOURCE_TARGET_CONFLICT": "Source and target conflict at {field}.",
+  "contracts.DUPLICATE_SECRET_REFERENCE": "Duplicate secret reference at {field}."
+}
