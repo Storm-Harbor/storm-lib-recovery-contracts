@@ -1,0 +1,8 @@
+{
+  "contracts.INVALID_DOCUMENT": "Ungültiges Dokument bei {field}.",
+  "contracts.INVALID_CONFIGURATION": "Ungültige Konfiguration bei {field}.",
+  "contracts.INVALID_SCOPE": "Ungültiger Geltungsbereich bei {field}.",
+  "contracts.SCOPE_MISMATCH": "Der Geltungsbereich stimmt bei {field} nicht überein.",
+  "contracts.SOURCE_TARGET_CONFLICT": "Konflikt zwischen Quelle und Ziel bei {field}.",
+  "contracts.DUPLICATE_SECRET_REFERENCE": "Doppelter Geheimnisverweis bei {field}."
+}

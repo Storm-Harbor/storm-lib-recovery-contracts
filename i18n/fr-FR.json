@@ -1,0 +1,8 @@
+{
+  "contracts.INVALID_DOCUMENT": "Document non valide dans {field}.",
+  "contracts.INVALID_CONFIGURATION": "Configuration non valide dans {field}.",
+  "contracts.INVALID_SCOPE": "Périmètre non valide dans {field}.",
+  "contracts.SCOPE_MISMATCH": "Le périmètre ne correspond pas dans {field}.",
+  "contracts.SOURCE_TARGET_CONFLICT": "Conflit entre source et destination dans {field}.",
+  "contracts.DUPLICATE_SECRET_REFERENCE": "Référence de secret en double dans {field}."
+}

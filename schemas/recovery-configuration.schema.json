@@ -1,0 +1,215 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://stormharbor.io/schemas/recovery-configuration/v1alpha1",
+  "title": "Storm Harbor RecoveryConfiguration v1alpha1",
+  "description": "Offline shape validation only. Go validation must also check trusted scope, alias conflicts and unique secret aliases. This is not an installed Kubernetes CRD or an executable recovery plan.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "apiVersion",
+    "kind",
+    "metadata",
+    "spec"
+  ],
+  "properties": {
+    "apiVersion": {
+      "const": "recovery.stormharbor.io/v1alpha1"
+    },
+    "kind": {
+      "const": "RecoveryConfiguration"
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "scope"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "pattern": "^[a-z](?:[a-z0-9-]{0,61}[a-z0-9])?$"
+        },
+        "scope": {
+          "$ref": "#/$defs/scope"
+        }
+      }
+    },
+    "spec": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "purpose",
+        "source",
+        "target"
+      ],
+      "properties": {
+        "purpose": {
+          "enum": [
+            "exercise",
+            "restore"
+          ]
+        },
+        "source": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "name",
+            "scope"
+          ],
+          "properties": {
+            "name": {
+              "type": "string",
+              "pattern": "^[a-z](?:[a-z0-9-]{0,61}[a-z0-9])?$"
+            },
+            "scope": {
+              "$ref": "#/$defs/scope"
+            }
+          }
+        },
+        "target": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "name",
+            "providerRef",
+            "provisioning",
+            "placementRef",
+            "lifecycle",
+            "cleanup"
+          ],
+          "properties": {
+            "name": {
+              "type": "string",
+              "pattern": "^[a-z](?:[a-z0-9-]{0,61}[a-z0-9])?$"
+            },
+            "providerRef": {
+              "type": "string",
+              "pattern": "^[a-z](?:[a-z0-9-]{0,61}[a-z0-9])?$"
+            },
+            "provisioning": {
+              "enum": [
+                "create",
+                "existing"
+              ]
+            },
+            "placementRef": {
+              "type": "string",
+              "pattern": "^[a-z](?:[a-z0-9-]{0,61}[a-z0-9])?$"
+            },
+            "lifecycle": {
+              "enum": [
+                "ephemeral",
+                "retained"
+              ]
+            },
+            "cleanup": {
+              "enum": [
+                "run-owned",
+                "retain"
+              ]
+            },
+            "ttlSeconds": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 4294967295
+            }
+          }
+        },
+        "secrets": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "name",
+              "scope",
+              "purpose"
+            ],
+            "properties": {
+              "name": {
+                "type": "string",
+                "pattern": "^[a-z](?:[a-z0-9-]{0,61}[a-z0-9])?$"
+              },
+              "scope": {
+                "$ref": "#/$defs/scope"
+              },
+              "purpose": {
+                "type": "string",
+                "pattern": "^[a-z](?:[a-z0-9-]{0,61}[a-z0-9])?$"
+              }
+            }
+          }
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "purpose": {
+                "const": "exercise"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "target": {
+                "required": [
+                  "ttlSeconds"
+                ],
+                "properties": {
+                  "lifecycle": {
+                    "const": "ephemeral"
+                  },
+                  "cleanup": {
+                    "const": "run-owned"
+                  },
+                  "ttlSeconds": {
+                    "minimum": 1
+                  }
+                }
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "target": {
+                "properties": {
+                  "lifecycle": {
+                    "const": "retained"
+                  },
+                  "cleanup": {
+                    "const": "retain"
+                  },
+                  "ttlSeconds": {
+                    "const": 0
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  },
+  "$defs": {
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "organizationId",
+        "projectId"
+      ],
+      "properties": {
+        "organizationId": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$"
+        },
+        "projectId": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$"
+        }
+      }
+    }
+  }
+}

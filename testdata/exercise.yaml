@@ -1,0 +1,28 @@
+apiVersion: recovery.stormharbor.io/v1alpha1
+kind: RecoveryConfiguration
+metadata:
+  name: service-exercise
+  scope:
+    organizationId: org-example
+    projectId: project-example
+spec:
+  purpose: exercise
+  source:
+    name: primary-environment
+    scope:
+      organizationId: org-example
+      projectId: project-example
+  target:
+    name: exercise-environment
+    providerRef: gcp-recovery
+    provisioning: create
+    placementRef: exercise-europe
+    lifecycle: ephemeral
+    cleanup: run-owned
+    ttlSeconds: 3600
+  secrets:
+    - name: recovery-database
+      scope:
+        organizationId: org-example
+        projectId: project-example
+      purpose: restore-database

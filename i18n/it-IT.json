@@ -1,0 +1,8 @@
+{
+  "contracts.INVALID_DOCUMENT": "Documento non valido in {field}.",
+  "contracts.INVALID_CONFIGURATION": "Configurazione non valida in {field}.",
+  "contracts.INVALID_SCOPE": "Ambito non valido in {field}.",
+  "contracts.SCOPE_MISMATCH": "L’ambito non corrisponde in {field}.",
+  "contracts.SOURCE_TARGET_CONFLICT": "Conflitto tra origine e destinazione in {field}.",
+  "contracts.DUPLICATE_SECRET_REFERENCE": "Riferimento al segreto duplicato in {field}."
+}

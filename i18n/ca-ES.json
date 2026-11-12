@@ -1,0 +1,8 @@
+{
+  "contracts.INVALID_DOCUMENT": "Document no vàlid a {field}.",
+  "contracts.INVALID_CONFIGURATION": "Configuració no vàlida a {field}.",
+  "contracts.INVALID_SCOPE": "Àmbit no vàlid a {field}.",
+  "contracts.SCOPE_MISMATCH": "L’àmbit no coincideix a {field}.",
+  "contracts.SOURCE_TARGET_CONFLICT": "Conflicte entre origen i destinació a {field}.",
+  "contracts.DUPLICATE_SECRET_REFERENCE": "Referència de secret duplicada a {field}."
+}
