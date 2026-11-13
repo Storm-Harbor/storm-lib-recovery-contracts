@@ -1,0 +1,35 @@
+name: Branch policy
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, edited, ready_for_review]
+
+permissions:
+  contents: read
+
+jobs:
+  branch-policy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Require issue-to-develop or same-repository develop-to-master
+        env:
+          BASE_BRANCH: ${{ github.base_ref }}
+          HEAD_BRANCH: ${{ github.head_ref }}
+          BASE_REPOSITORY: ${{ github.repository }}
+          HEAD_REPOSITORY: ${{ github.event.pull_request.head.repo.full_name }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          case "$BASE_BRANCH" in
+            develop)
+              [[ "$HEAD_BRANCH" =~ ^[1-9][0-9]*-(feat|fix)-[a-z0-9]+(-[a-z0-9]+)*$ ]]
+              ;;
+            master)
+              test "$HEAD_BRANCH" = develop
+              test "$HEAD_REPOSITORY" = "$BASE_REPOSITORY"
+              ;;
+            *)
+              echo 'Unsupported pull-request base.' >&2
+              exit 1
+              ;;
+          esac
