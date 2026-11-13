@@ -2,7 +2,7 @@ name: Go contracts
 
 on:
   push:
-    branches: [main]
+    branches: [develop, master]
   pull_request:
   workflow_dispatch:
 
